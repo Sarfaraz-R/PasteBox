@@ -16,10 +16,18 @@ const ACCESS_MAX_AGE = 15 * 60 * 1000;
 const REFRESH_MAX_AGE = 7 * 24 * 60 * 60 * 1000;
 const OAUTH_STATE_MAX_AGE = 10 * 60 * 1000;
 
+const isProductionCookieEnv = () => {
+  const clientUrl = process.env.CLIENT_URL || "";
+  const baseUrl = process.env.BASE_URL || "";
+  return process.env.NODE_ENV === "production"
+    || clientUrl.startsWith("https://")
+    || baseUrl.startsWith("https://");
+};
+
 const cookieOptions = (maxAge) => ({
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  secure: isProductionCookieEnv(),
+  sameSite: isProductionCookieEnv() ? "none" : "lax",
   maxAge,
   path: "/",
 });

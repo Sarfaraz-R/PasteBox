@@ -1,7 +1,16 @@
 import axios from "axios";
 
 const DEFAULT_API_URL = "/api/";
-const BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_API_URL;
+const normalizeApiBaseUrl = (value = DEFAULT_API_URL) => {
+  const trimmed = value.trim().replace(/\/+$/, "");
+  if (!trimmed) {
+    return "/api";
+  }
+
+  return trimmed.endsWith("/api") ? trimmed : `${trimmed}/api`;
+};
+
+const BASE_URL = normalizeApiBaseUrl(import.meta.env.VITE_API_URL || DEFAULT_API_URL);
 const ACCESS_TOKEN_KEY = "pastebox_access_token";
 const REFRESH_TOKEN_KEY = "pastebox_refresh_token";
 

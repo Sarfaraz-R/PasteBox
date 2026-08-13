@@ -1,6 +1,6 @@
 // src/features/auth/authThunks.js
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axiosInstance from '../../../config/axiosInstance';
+import axiosInstance, { clearAuthTokens, storeAuthTokens } from '../../../config/axiosInstance';
 
 // REGISTER
 export const registerUser = createAsyncThunk('auth/register', async (formData, { rejectWithValue }) => {
@@ -16,6 +16,7 @@ export const registerUser = createAsyncThunk('auth/register', async (formData, {
 export const loginUser = createAsyncThunk('auth/login', async (formData, { rejectWithValue }) => {
   try {
     const res = await axiosInstance.post('/auth/login', formData);
+    storeAuthTokens(res.data || {});
     return res.data;
   } catch (err) {
     return rejectWithValue(err.response?.data?.message || 'Login failed');
@@ -25,8 +26,10 @@ export const loginUser = createAsyncThunk('auth/login', async (formData, { rejec
 export const logoutSession = createAsyncThunk('auth/logoutSession', async (_, { rejectWithValue }) => {
   try {
     const res = await axiosInstance.post('/auth/logout');
+    clearAuthTokens();
     return res.data;
   } catch (err) {
+    clearAuthTokens();
     return rejectWithValue(err.response?.data?.message || 'Logout failed');
   }
 });
@@ -43,8 +46,10 @@ export const getCurrentUser = createAsyncThunk('auth/me', async (_, { rejectWith
 export const refreshSession = createAsyncThunk('auth/refresh', async (_, { rejectWithValue }) => {
   try {
     const res = await axiosInstance.post('/auth/refresh');
+    storeAuthTokens(res.data || {});
     return res.data.user;
   } catch (err) {
+    clearAuthTokens();
     return rejectWithValue(err.response?.data?.message || 'Session expired');
   }
 });
@@ -64,6 +69,7 @@ export const updateUser = createAsyncThunk('auth/updateUser', async ({ userId, u
 export const deleteUser = createAsyncThunk('auth/deleteUser', async (userId, { rejectWithValue }) => {
   try {
     await axiosInstance.delete(`/users/user/${userId}`);
+    clearAuthTokens();
     return userId;
   } catch (err) {
     return rejectWithValue(err.response?.data);
@@ -79,7 +85,6 @@ export const getUser = createAsyncThunk('auth/getUser', async (userId, { rejectW
     return rejectWithValue(err.response?.data);
   }
 });
-
 
 
 

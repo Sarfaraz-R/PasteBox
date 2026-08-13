@@ -107,7 +107,7 @@ export const getFileDownloadUrl = (file) =>
   file?.downloadUrl || file?.path || file?.url || file?.previewUrl || "";
 
 export const getApiBaseUrl = () => {
-  const configuredBase = import.meta.env.VITE_API_URL || "http://localhost:6600/api/";
+  const configuredBase = import.meta.env.VITE_API_URL || "/api/";
   return configuredBase.endsWith("/") ? configuredBase.slice(0, -1) : configuredBase;
 };
 

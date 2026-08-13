@@ -33,7 +33,7 @@ const GuestFileUpload = ({ guestFiles, updateFiles }) => {
       return { ok: true, data: nextFiles };
     } catch (error) {
       const message = error?.code === "ERR_NETWORK"
-        ? "Guest upload failed because the backend on http://localhost:6600 is not running or not reachable."
+        ? "Guest upload failed because the backend is not running or not reachable."
         : error?.response?.data?.message || error?.error || "Upload failed";
       toast.error(message);
       setLoading(false);

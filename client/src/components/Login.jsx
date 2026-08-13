@@ -11,7 +11,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { loading } = useSelector((state) => state.auth);
+  const { loading, isLoggedIn } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   useEffect(() => {
@@ -24,6 +24,12 @@ const Login = () => {
       navigate("/login", { replace: true });
     }
   }, [location.search, navigate]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -44,7 +50,7 @@ const Login = () => {
     }
 
     toast.success("Login successful");
-    navigate("/dashboard");
+    navigate("/dashboard", { replace: true });
   };
 
   const handleGoogleLogin = () => {

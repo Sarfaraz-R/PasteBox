@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg-color: #b4e1eb;
+  --primary-bg: #b4e1eb;
+  --surface: #ffffff;
+  --surface-2: #95bdd7;
+  --surface-3: #78a4cb;
+  --text-color: #000000;
+  --secondary-text: #000000;
+  --text-secondary: #000000;
+  --muted-text: #111111;
+  --primary-text: #000000;
+  --text-on-primary: #000000;
+  --primary-soft: rgba(120, 164, 203, 0.12);
+  --border-color: rgba(149, 189, 215, 0.8);
+  --hover-bg-color: rgba(149, 189, 215, 0.18);
+  --primary-gradient: linear-gradient(180deg, rgba(149, 189, 215, 0.36), rgba(180, 225, 235, 0.42));
+  --shadow-soft: 0 20px 60px rgba(60, 93, 120, 0.18);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #78a4cb #b4e1eb;
+  box-sizing: border-box;
+}
+
+html {
+  background: #b4e1eb;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(149, 189, 215, 0.46), transparent 28rem),
+    radial-gradient(circle at top right, rgba(249, 232, 162, 0.26), transparent 24rem),
+    #b4e1eb;
+  color: var(--text-color);
+  font-family: "Fira Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1;
+}
+
+::selection {
+  background: rgba(120, 164, 203, 0.28);
+  color: #000000;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #b4e1eb;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #78a4cb;
+  border: 2px solid #b4e1eb;
+  border-radius: 999px;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(120, 164, 203, 0.55);
+  outline-offset: 3px;
+}
+
+input,
+select,
+textarea {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-color);
+  color: #000000;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+select option {
+  background: #ffffff;
+  color: #000000;
+}
+
+.premium-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(149, 189, 215, 0.55));
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.premium-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.6875rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(120, 164, 203, 0.35);
+  background: #78a4cb;
+  color: #000000;
+  font-weight: 700;
+  box-shadow: inset 0 -1px 0 rgba(31, 41, 55, 0.08);
+}
+
+@media (min-width: 640px) {
+  .premium-button {
+    font-size: 0.75rem;
+  }
+}
+
+.premium-button:hover {
+  transform: translateY(-1px);
+  background: rgba(120, 164, 203, 0.9);
+}
+
+.premium-button-secondary {
+  background: rgba(149, 189, 215, 0.28);
+  color: #000000;
+  border: 1px solid var(--border-color);
+}
+
+.premium-button-secondary:hover {
+  background: rgba(149, 189, 215, 0.42);
+}
+
+.animate-fade-in {
+  animation: fadeIn 520ms ease both;
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.35), rgba(149, 189, 215, 0.55), rgba(255, 255, 255, 0.35));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.Toastify__toast {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid #78a4cb;
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+.Toastify__toast--error {
+  border-left-color: #8b3a3a;
+}
+
+.Toastify__toast--success {
+  border-left-color: #f9e8a2;
+}
+
+.Toastify__toast--info {
+  border-left-color: #95bdd7;
+}
+
+.Toastify__progress-bar {
+  background: #78a4cb;
+}
+
+.Toastify__toast-container {
+  z-index: 90;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}

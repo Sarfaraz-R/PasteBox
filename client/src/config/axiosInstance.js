@@ -18,6 +18,9 @@ const storageAvailable = () => typeof window !== "undefined" && typeof window.lo
 
 const getStoredToken = (key) => (storageAvailable() ? window.localStorage.getItem(key) : null);
 
+export const hasStoredAuthTokens = () =>
+  Boolean(getStoredToken(ACCESS_TOKEN_KEY) || getStoredToken(REFRESH_TOKEN_KEY));
+
 export const storeAuthTokens = ({ accessToken, refreshToken }) => {
   if (!storageAvailable()) {
     return;

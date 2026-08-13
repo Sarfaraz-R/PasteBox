@@ -14,13 +14,20 @@ import GuestHomePage from "./components/Guest/GuestHomePage";
 import GuestHome from "./components/Guest/Download/GuestHome";
 import BundleDownload from "./components/BundleDownload";
 import GuestBundleHome from "./components/Guest/Download/GuestBundleHome";
+import { hasStoredAuthTokens } from "./config/axiosInstance";
+import { markAuthInitialized } from "./redux/slice/auth/authSlice";
 import { getCurrentUser } from "./redux/slice/auth/authThunk";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCurrentUser());
+    if (hasStoredAuthTokens()) {
+      dispatch(getCurrentUser());
+      return;
+    }
+
+    dispatch(markAuthInitialized());
   }, [dispatch]);
 
   return (

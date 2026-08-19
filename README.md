@@ -342,28 +342,6 @@ npm run dev
 npm start
 ```
 
-## Screenshots
-
-### User Dashboard
-
-![User Dashboard](./client/src/assets/screenshots/user_dashboard.png)
-
-### Guest Dashboard
-
-![Guest Dashboard](./client/src/assets/screenshots/dashboard.png)
-
-### Upload Flow
-
-![Upload](./client/src/assets/screenshots/upload.png)
-
-### Share Modal
-
-![Share Modal](./client/src/assets/screenshots/share.png)
-
-### File Preview
-
-![File Preview](./client/src/assets/screenshots/file_preview.png)
-
 ## Deployment Notes
 
 - The frontend appears prepared for Vercel deployment through `client/vercel.json`.
